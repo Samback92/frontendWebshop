@@ -24,3 +24,4 @@ node_modules
 # API nycklar och konfigurationer
 .env
 
+.env.production
