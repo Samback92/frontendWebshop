@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { User } from '../interfaces/User';
 
 const UserList: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
-        axios.get('/api/users')
-            .then(response => {
-                console.log(response.data);
-                setUsers(response.data);
-            })
-            .catch(error => console.error(error));
-    }, []);
+        fetch('https://monkfish-app-v42dg.ondigitalocean.app/api/users')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error ('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => setUsers(data))
+        .catch(error => console.error('Error fetching Users: ', error));
+}, []);
 
     return (
         <div>
