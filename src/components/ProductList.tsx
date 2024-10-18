@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Product } from '../interfaces/Product';
 
 
@@ -7,9 +6,15 @@ const ProductList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        axios.get('/api/products')
-            .then(response => setProducts(response.data))
-            .catch(error => console.error(error));
+        fetch('https://monkfish-app-v42dg.ondigitalocean.app/api/products')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error ('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => setProducts(data))
+            .catch(error => console.error('Error fetching products: ', error));
     }, []);
 
     return (
