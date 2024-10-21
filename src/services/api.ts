@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://monkfish-app-v42dg.ondigitalocean.app/api";
 
 export const createPaymentIntent = async (amount: number) => {
     try {
