@@ -1,29 +1,40 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserList from './components/UserList';
-import ProductList from './components/ProductList';
-import NavBar from './components/NavBar';
-
-const HomePage: React.FC = () => (
-  <div>
-      <h1>Välkommen till min app!</h1>
-      <p>Detta är startsidan.</p>
-  </div>
-);
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+import ProductDetail from './components/ProductDetail';
+import StripeCheckout from './components/checkout/CheckoutForm';
+import './styling/App.css';
 
 const App: React.FC = () => {
-  return (
-      <Router>
-          <div>
-              <NavBar />
-              <Routes>
-                  <Route path="/users" element={<UserList />} />
-                  <Route path="/products" element={<ProductList />} />
-                  <Route path="/" element={<HomePage />} />
-              </Routes>
-          </div>
-      </Router>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <header>
+                    <h1>Webshop</h1>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/products">Products</a>
+                            </li>
+                            <li>
+                                <a href="/checkout">Checkout</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+                <Routes>
+                    <Route path="/products" element={<ProductPage />} />
+                    {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
+                    {/* <Route path="/" element={<HomePage />} /> */}
+                    <Route path="/checkout" element={<StripeCheckout />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 };
 
-export default App
+export default App;

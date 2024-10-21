@@ -24,7 +24,7 @@ const ProductList: React.FC = () => {
                 {products.map(product => (
                     <li key={product.id}>
                         <img src={product.image} alt={product.name} />
-                        <h2>{product.name}</h2>
+                        <h1>{product.name}</h1>
                         <p>{product.description}</p>
                         <p>{product.price} SEK</p>
                     </li>
