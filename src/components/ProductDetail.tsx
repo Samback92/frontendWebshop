@@ -10,7 +10,7 @@ const ProductDetail: React.FC = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/products/${id}`);
+                const response = await fetch(`https://monkfish-app-v42dg.ondigitalocean.app/api/products/${id}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
