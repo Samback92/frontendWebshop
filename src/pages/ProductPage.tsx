@@ -1,49 +1,57 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../interfaces/Product";
 import { formatCurrency } from "../utils/helpers";
 import { createPaymentIntent } from "../services/api";
 
 
-const ProductPage: React.FC = () => {
-        const [products, setProducts] = useState<Product[]>([]);
+function ProductPage() {
+    const [products, setProducts] = useState<Product[]>([]);
 
-        useEffect(() => {
-            fetch('https://monkfish-app-v42dg.ondigitalocean.app/api/products')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error ('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => setProducts(data))
-                .catch(error => console.error('Error fetching products: ', error));
-        }, []);
+    const fetchProducts = () => {
+        fetch('https://monkfish-app-v42dg.ondigitalocean.app/api/products')
+        .then(response => {
+            console.log('Fetching products response:', response);
+            return response.json();
+        })
+        .then(data => {
+            setProducts(data);
+            console.log('Products fetched successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+    };
 
-        const handlePurchases = async (product: Product) => {
-            try {
-                const paymentIntent = await createPaymentIntent(product.price);
-                console.log("Payment intent:", paymentIntent);
-            } catch (error) {
-                console.error('Error handling purchase: ', error);
-            }
-        };
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
-        return (
-            <div>
-                <h1>Produkter</h1>
-                <ul>
-                   {products.map(product => ( 
+    const handlePurchases = async (product: Product) => {
+        try {
+            console.log('Creating payment intent for product:', product);
+            const paymentIntent = await createPaymentIntent(product.price);
+            console.log("Payment intent:", paymentIntent);
+        } catch (error) {
+            console.error('Error handling purchase:', error);
+        }
+    };
+
+    return (
+        <div>
+            <h1>Produkter</h1>
+            <ul>
+                {products.map(product => (
                     <li key={product.id}>
                         <h3>{product.name}</h3>
                         <img src={product.image} alt={product.name} />
-                        {product.description}
-                        {formatCurrency(product.price)}
+                        <p>{product.description}</p>
+                        <p>{formatCurrency(product.price)}</p>
                         <button onClick={() => handlePurchases(product)}>Buy</button>
                     </li>
-                    ))} 
-                </ul>
-            </div>
-        );
-};
+                ))}
+            </ul>
+        </div>
+    );
+}
 
 export default ProductPage;
