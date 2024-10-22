@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import {HomePage} from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
-import StripeCheckout from './components/checkout/CheckoutForm';
+import StripeCheckoutNow from './components/checkout/CheckoutForm';
 import './styling/App.css';
 
 const App: React.FC = () => {
@@ -13,13 +14,13 @@ const App: React.FC = () => {
                     <nav>
                         <ul>
                             <li>
-                                <a href="/">Home</a>
+                                <Link to="/">Home</Link>
                             </li>
                             <li>
-                                <a href="/products">Products</a>
+                                <Link to="/products">Products</Link>
                             </li>
                             <li>
-                                <a href="/checkout">Checkout</a>
+                                <Link to="/checkout">Checkout</Link>
                             </li>
                         </ul>
                     </nav>
@@ -27,8 +28,8 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/products" element={<ProductPage />} />
                     {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
-                    {/* <Route path="/" element={<HomePage />} /> */}
-                    <Route path="/checkout" element={<StripeCheckout />} />
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/checkout" element={<StripeCheckoutNow />} />
                 </Routes>
             </div>
         </Router>
