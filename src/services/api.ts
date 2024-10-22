@@ -1,8 +1,8 @@
-const API_URL = "https://monkfish-app-v42dg.ondigitalocean.app/api";
+// const API_URL = "https://monkfish-app-v42dg.ondigitalocean.app/api";
 
 export const createPaymentIntent = async (amount: number) => {
     try {
-        const response = await fetch(`${API_URL}/stripe/create-payment-intent`, {
+        const response = await fetch(`https://monkfish-app-v42dg.ondigitalocean.app/api/stripe/create-payment-intent`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
