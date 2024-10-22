@@ -52,10 +52,10 @@ const CheckoutForm: React.FC = () => {
     );
 };
 
-const StripeCheckout: React.FC = () => (
+const StripeCheckoutNow: React.FC = () => (
     <Elements stripe={stripePromise}>
         <CheckoutForm />
     </Elements>
- );
+);
 
-export default StripeCheckout
+export default StripeCheckoutNow
