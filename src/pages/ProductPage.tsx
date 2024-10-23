@@ -1,40 +1,24 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Product } from "../interfaces/Product";
+import { fetchProducts } from "../services/api";
+import { CartContext } from "../contexts/CartContext";
 import { formatCurrency } from "../utils/helpers";
-import { createPaymentIntent } from "../services/api";
 
-
-function ProductPage() {
+const ProductPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
-
-    const fetchProducts = () => {
-        fetch('https://monkfish-app-v42dg.ondigitalocean.app/api/products')
-        .then(response => {
-            console.log('Fetching products response:', response);
-            return response.json();
-        })
-        .then(data => {
-            setProducts(data);
-            console.log('Products fetched successfully:', data);
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-        });
-    };
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
-        fetchProducts();
+        const getProducts = async () => {
+            try {
+                const products = await fetchProducts();
+                setProducts(products);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+        getProducts();
     }, []);
-
-    const handlePurchases = async (product: Product) => {
-        try {
-            console.log('Creating payment intent for product:', product);
-            const paymentIntent = await createPaymentIntent(product.price);
-            console.log("Payment intent:", paymentIntent);
-        } catch (error) {
-            console.error('Error handling purchase:', error);
-        }
-    };
 
     return (
         <div>
@@ -46,12 +30,12 @@ function ProductPage() {
                         <img src={product.image} alt={product.name} />
                         <p>{product.description}</p>
                         <p>{formatCurrency(product.price)}</p>
-                        <button onClick={() => handlePurchases(product)}>Buy</button>
+                        <button onClick={() => addToCart(product)}>Add to Cart</button>
                     </li>
                 ))}
             </ul>
         </div>
     );
-}
+};
 
 export default ProductPage;
