@@ -8,7 +8,7 @@ import { formatCurrency } from '../../utils/helpers';
 const stripePromise = loadStripe('pk_test_51OqXrwITRkRLeIiFw7GXzcCkfnG3sjv6O8pX344pLBeWmp0evITiPKcymd7cd4VzD4t1gTDfNZo2VAw0616SKYlj00FiEa37vb');
 
 const CheckoutForm: React.FC = () => {
-    const { cart, totalPrice } = useCart();
+    const { totalPrice } = useCart();
     const stripe = useStripe();
     const elements = useElements();
 

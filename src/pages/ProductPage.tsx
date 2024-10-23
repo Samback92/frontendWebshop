@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Product } from "../interfaces/Product";
 import { fetchProducts } from "../services/api";
-import { CartContext } from "../contexts/CartContext";
+import { useCart } from "../contexts/CartContext";
 import { formatCurrency } from "../utils/helpers";
 
 const ProductPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    const { addToCart } = useContext(CartContext);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const getProducts = async () => {
