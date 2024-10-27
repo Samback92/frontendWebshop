@@ -4,8 +4,10 @@ import {HomePage} from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
 import StripeCheckoutNow from './components/checkout/CheckoutForm';
-import { CartProvider } from './contexts/CartContext'
+import { CartProvider } from './contexts/CartContext';
+import OpenAIComponent from './components/AI/fetchFromOpenAI';
 import './styling/App.css';
+
 
 const App: React.FC = () => {
     return (
@@ -37,6 +39,7 @@ const App: React.FC = () => {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/checkout" element={<StripeCheckoutNow />} />
                     </Routes>
+                    <OpenAIComponent />
                 </div>
             </Router>
         </CartProvider>

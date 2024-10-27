@@ -29,3 +29,15 @@ main {
   max-width: 800px;
   padding: 20px;
 }
+
+.OpenAIComponent {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
