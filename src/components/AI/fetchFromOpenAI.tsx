@@ -22,6 +22,7 @@ const OpenAIComponent: React.FC = () => {
             const result = await fetchFromOpenAI(query);
             const aiResponse = result.choices[0].text.trim(); // Extrahera och visa endast AI-svaret
             setResponse(aiResponse);
+            setQuery(''); // Töm inputfältet när frågan skickats
         } catch (error) {
             setResponse('Ett fel uppstod vid hämtning av data från OpenAI.');
         }
