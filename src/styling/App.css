@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -31,13 +31,57 @@ main {
 }
 
 .OpenAIComponent {
-  position: fixed;
+  position:fixed;
   bottom: 20px;
   right: 20px;
   width: 300px;
   background: #f0f0f0;
   border: 1px solid #ccc;
   padding: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid orange;
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
+}
+
+.ai-component {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.response {
+  margin-top: 20px;
+  text-align: center;
+  border-style: double;
+  border-width: 5px;
+  border-color: #ccc;
+  border-radius: 10px;
+  overflow-y: auto;
+
+  max-width: 600px;
+ 
+  padding: 10px;
+  max-height: 700px;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+
+}
+
+.response p {
+  margin: 50;
+}
